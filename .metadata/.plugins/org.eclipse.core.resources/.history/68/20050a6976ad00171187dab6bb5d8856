@@ -1,0 +1,10 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	<hibernate-mapping>
+		<class name="com.save.Product" table="product">
+			<id name="productId" column="pid" type="int"/>
+			<property name="productName" column="pname" type="String"/>
+			<property name="price" column="price" type="double"/>
+		</class>
+	</hibernate-mapping>

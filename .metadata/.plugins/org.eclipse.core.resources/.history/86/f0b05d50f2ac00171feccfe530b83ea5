@@ -1,0 +1,26 @@
+package com.kilaparthi;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+public class Main {
+	public static void main(String[] args)throws Exception
+	{
+		Configuration conf = new Configuration();
+		System.out.println("11");
+		conf.configure("hibernate.cfg.xml");
+	    SessionFactory factory=conf.buildSessionFactory();
+	    Session session=factory.openSession();
+	    Product product = new Product();  
+	    product.setProductId(101);
+	    product.setProductName("Ramu");
+	    product.setPrice(6000);
+	    Transaction tx=session.beginTransaction();
+	    session.save(product);
+	    tx.commit();
+	    session.close();
+	    factory.close();
+	}
+}

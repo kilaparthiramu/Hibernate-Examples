@@ -1,0 +1,27 @@
+package com.save;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+public class Main {
+
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		Configuration conf =new Configuration();
+		conf.configure("hibernate.cfg.xml");
+		SessionFactory factory =conf.buildSessionFactory();
+		Session session = factory.openSession();
+		Product product = new Product();
+		product.setProductId(103);
+		product.setProductName("satya");
+		product.setPrice(20000);
+		Transaction tx = (Transaction) session.beginTransaction();
+		session.save(product);
+		tx.commit();
+		session.close();
+		factory.close();
+	}
+
+}

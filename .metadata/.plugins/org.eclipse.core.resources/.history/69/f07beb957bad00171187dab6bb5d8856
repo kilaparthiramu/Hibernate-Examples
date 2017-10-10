@@ -1,0 +1,83 @@
+package com.save;
+
+import java.util.Scanner;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+public class Main {
+	
+	public void saveEmployee(){
+		Configuration conf =new Configuration();
+		conf.configure("hibernate.cfg.xml");
+		SessionFactory factory =conf.buildSessionFactory();
+		Session session = factory.openSession();
+		Product product = new Product();
+		product.setProductId(104);
+		product.setProductName("Narayana");
+		product.setPrice(20600);
+		Transaction tx = (Transaction) session.beginTransaction();
+		session.save(product);
+		tx.commit();
+		session.close();
+		factory.close();
+	}
+	
+	public void gettingEmployee(){
+		Configuration conf =new Configuration();
+		conf.configure("hibernate.cfg.xml");
+		SessionFactory factory =conf.buildSessionFactory();
+		Session session = factory.openSession();
+		Object o = session.load(Product.class,103);
+		Product product = (Product)o;
+		System.out.println("productId:"+product.getProductId());
+		System.out.println("productname:"+product.getProductName());
+		System.out.println("price:"+product.getPrice());
+		session.close();
+		factory.close();
+	}
+	
+	public void updateEmployee(){
+		Configuration conf =new Configuration();
+		conf.configure("hibernate.cfg.xml");
+		SessionFactory factory =conf.buildSessionFactory();
+		Session session = factory.openSession();
+		Object o = session.get(Product.class,102);
+		Product product = (Product)o;
+		product.setPrice(1000);
+		Transaction tx = (Transaction) session.beginTransaction();
+		session.update(product);
+		tx.commit();
+		session.close();
+		factory.close();
+	}
+	
+	public void deleteEmployee(){
+		Configuration conf =new Configuration();
+		conf.configure("hibernate.cfg.xml");
+		SessionFactory factory =conf.buildSessionFactory();
+		Session session = factory.openSession();
+		Object o = session.get(Product.class,104);
+		Product product = (Product)o;
+		Transaction tx = (Transaction) session.beginTransaction();
+		session.delete(product);
+		tx.commit();
+		session.close();
+		factory.close();
+	}
+
+	public static void main(String[] args) throws Exception {
+		Scanner sc = new Scanner(System.in);
+		int i = sc.nextInt();
+		
+		Main main = new Main();
+		//main.saveEmployee();
+		main.gettingEmployee();
+		//main.updateEmployee();
+		//main.deleteEmployee();
+		
+	}
+
+}
